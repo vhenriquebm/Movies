@@ -22,7 +22,6 @@ jobs:
 
       - name: Build project
         run: |
-          cd Movies
           xcodebuild \
             -project Movies.xcodeproj \
             -scheme Movies \
@@ -31,7 +30,6 @@ jobs:
 
       - name: Run tests
         run: |
-          cd Movies
           xcodebuild \
             -project Movies.xcodeproj \
             -scheme Movies \
