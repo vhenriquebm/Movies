@@ -37,7 +37,7 @@ jobs:
       - name: Build project
         run: |
           xcodebuild \
-            -project Movies.xcodeproj \
+            -workspace Movies.xcodeproj/project.xcworkspace \
             -scheme Movies \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
             clean build
@@ -46,7 +46,7 @@ jobs:
       - name: Run tests
         run: |
           xcodebuild \
-            -project Movies.xcodeproj \
+            -workspace Movies.xcodeproj/project.xcworkspace \
             -scheme Movies \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
             test
