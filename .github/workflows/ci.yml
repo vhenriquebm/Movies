@@ -41,12 +41,12 @@ jobs:
 
       - name: Mostrar destinos disponíveis (debug)
         run: |
-          xcodebuild -project Movies.xcodeproj -scheme Movies -showdestinations
+          xcodebuild -project Movies/Movies.xcodeproj -scheme Movies -showdestinations
 
       - name: Build do Projeto
         run: |
           xcodebuild \
-            -project Movies.xcodeproj \
+            -project Movies/Movies.xcodeproj \
             -scheme Movies \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
             clean build | tee build.log
@@ -54,7 +54,7 @@ jobs:
       - name: Run Tests
         run: |
           xcodebuild \
-            -project Movies.xcodeproj \
+            -project Movies/Movies.xcodeproj \
             -scheme Movies \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
             test | tee test.log
