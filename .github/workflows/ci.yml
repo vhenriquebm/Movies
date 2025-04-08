@@ -41,7 +41,7 @@ jobs:
 
       - name: Mostrar destinos disponíveis (debug)
         run: |
-          xcodebuild -project Movies/Movies.xcodeproj -scheme Movies -showdestinations
+          xcodebuild -project Movies.xcodeproj -scheme Movies -showdestinations
 
       - name: Build do Projeto
         run: |
@@ -61,7 +61,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload logs como artefatos
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: build-and-test-logs
           path: |
