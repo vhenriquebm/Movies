@@ -14,30 +14,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Mostrar diretório atual e conteúdo
+      - name: Verificar arquivos do projeto
         run: |
           echo "Diretório atual:"
           pwd
           echo "Conteúdo do diretório atual:"
           ls -la
-          echo "Buscando .xcodeproj..."
+          echo "Buscando arquivos .xcodeproj..."
           find . -name "*.xcodeproj"
+          echo "Se encontrado, aqui está o conteúdo de project.pbxproj:"
+          find . -name "project.pbxproj" -exec cat {} \;
 
       - name: Mostrar estrutura de pastas
         run: |
           brew install tree || echo "tree já instalado"
           tree -a -L 3
 
-      - name: Mostrar versão do Xcode
+      - name: Mostrar versao do Xcode
         run: xcodebuild -version
 
-      - name: Mostrar versão do Swift
+      - name: Mostrar versao do Swift
         run: swift --version
 
-      - name: Definir versão do Xcode
+      - name: Definir Versao do Xcode
         run: sudo xcode-select -s /Applications/Xcode_15.2.app
 
-      - name: Build do projeto
+      - name: Build do Projeto
         run: |
           xcodebuild \
             -project Movies.xcodeproj \
@@ -45,7 +47,7 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
             clean build
 
-      - name: Executar testes
+      - name: Run tests
         run: |
           xcodebuild \
             -project Movies.xcodeproj \
