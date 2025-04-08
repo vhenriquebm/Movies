@@ -14,6 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Verificar arquivos do projeto
+        run: |
+          ls -la
+          ls -la Movies.xcodeproj || echo "Movies.xcodeproj não encontrado"
+          cat Movies.xcodeproj/project.pbxproj || echo "project.pbxproj não pôde ser lido"
+
       - name: Show current directory
         run: pwd
 
