@@ -30,14 +30,18 @@ jobs:
           brew install tree || echo "tree já instalado"
           tree -a -L 3
 
-      - name: Mostrar versao do Xcode
+      - name: Mostrar versão do Xcode
         run: xcodebuild -version
 
-      - name: Mostrar versao do Swift
+      - name: Mostrar versão do Swift
         run: swift --version
 
-      - name: Definir Versao do Xcode
+      - name: Definir versão do Xcode
         run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Mostrar destinos disponíveis (debug)
+        run: |
+          xcodebuild -project Movies/Movies.xcodeproj -scheme Movies -showdestinations
 
       - name: Build do Projeto
         run: |
@@ -45,14 +49,21 @@ jobs:
             -project Movies/Movies.xcodeproj \
             -scheme Movies \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
-            clean build
+            clean build | tee build.log
 
-
-      - name: Run tests
+      - name: Run Tests
         run: |
           xcodebuild \
             -project Movies/Movies.xcodeproj \
             -scheme Movies \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
-            test
+            test | tee test.log
         continue-on-error: true
+
+      - name: Upload logs como artefatos
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-and-test-logs
+          path: |
+            build.log
+            test.log
