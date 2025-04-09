@@ -32,7 +32,22 @@ jobs:
         run: swift --version
 
       - name: Set Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app # Mantenha a versão que você precisa
+
+      - name: Set up Ruby (se ainda não estiver configurado)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.x' # Ou a versão do Ruby do seu projeto
+
+      - name: Update xcodeproj gem
+        run: sudo gem update xcodeproj -N --no-document
+
+      # Se o seu projeto "Movies" usa CocoaPods, adicione estes passos:
+      - name: Install CocoaPods
+        run: gem install cocoapods -N --no-document
+
+      - name: Pod Install
+        run: pod install --repo-update
 
       - name: Build project
         run: |
