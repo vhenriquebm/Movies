@@ -34,10 +34,10 @@ jobs:
       - name: Set Xcode version
         run: sudo xcode-select -s /Applications/Xcode_15.2.app # Mantenha a versão que você precisa
 
-      - name: Set up Ruby (se ainda não estiver configurado)
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.x' # Ou a versão do Ruby do seu projeto
+          ruby-version: '3.0.3' # Substitua pela versão do seu projeto (veja as opções no erro)
 
       - name: Update xcodeproj gem
         run: sudo gem update xcodeproj -N --no-document
